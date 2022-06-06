@@ -14,9 +14,12 @@ install VSCode and the ligolang-vscode extension https://marketplace.visualstudi
 ### compile and test the code 
 ligo compile contract mycontract.mligo -o mycontract.tz
 
-ligo run interpret "<code>" --init-file mycontract.mligo
-
 ligo run interpret "mul(10,32)" --init-file mycontract.mligo
+
+ligo run dry-run mycontract.mligo "Multiply(32)" "10"
+ligo run dry-run mycontract.mligo "Divide(32)" "10"
+ligo run dry-run mycontract.mligo "Divide(32)" "0"
+ligo run dry-run mycontract.mligo "Divide(0)" "0"
 
 From the command line (wait a bit between the steps for the transactions to commit): 
 
