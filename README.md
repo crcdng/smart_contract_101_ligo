@@ -6,7 +6,7 @@ these steps go successfully through the deployment of a "hello world" style Tezo
 
 install a tezos client by following instructions on https://github.com/serokell/tezos-packaging/blob/master/docs/distros/macos.md (`brew install tezos` from the tutorial does not work. If you use the public testnet node below you don't need to run a full node) 
 
-install Ligo https://ligolang.org/docs/intro/installation (I installed via Docker)
+install Ligo https://ligolang.org/docs/intro/installation (I installed via Docker and edited .zshrc to have the ligo command handy)
 
 install VSCode and the ligolang-vscode extension https://marketplace.visualstudio.com/items?itemName=ligolang-publish.ligo-vscode (I ran into an error mentioned here: https://gitlab.com/ligolang/ligo/-/issues/1413)
 
