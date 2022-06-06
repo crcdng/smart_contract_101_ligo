@@ -1,0 +1,11 @@
+{ parameter (or (or (int %divide) (int %multiply)) (unit %reset)) ;
+  storage int ;
+  code { UNPAIR ;
+         IF_LEFT
+           { IF_LEFT
+               { SWAP ; EDIV ; IF_NONE { PUSH string "DIV by 0" ; FAILWITH } {} ; CAR }
+               { SWAP ; MUL } }
+           { DROP 2 ; PUSH int 0 } ;
+         NIL operation ;
+         PAIR } }
+
