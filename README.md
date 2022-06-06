@@ -20,7 +20,7 @@ pick a name for your account. replace [myname] below with that
 
 tezos-client activate account [myname] with account.json
 
-tezos-client get balance for crc
+tezos-client get balance for [myname]
 
 tezos-client originate contract contract transferring 0 from [myname] running contract.tz --init 10 --burn-cap 0.2
 
