@@ -5,7 +5,7 @@ Smart contract demo.
 these steps go successfully through the deployment of a "hello world" style Tezos smart contract on the Ithaca testnet **on a Mac**:
 
 ### install development tools 
-install a tezos client by following instructions on https://github.com/serokell/tezos-packaging/blob/master/docs/distros/macos.md (`brew install tezos` from the tutorial does not work. If you use the public testnet node below you don't need to run a full node) 
+install a tezos client by following instructions on https://github.com/serokell/tezos-packaging/blob/master/docs/distros/macos.md (`brew install tezos` mentioned in the Ligo tutorial did not work. If you use the public testnet node below you don't need to run a full node, the client is fine.) 
 
 install Ligo https://ligolang.org/docs/intro/installation (I installed via Docker and edited .zshrc to have the ligo command handy)
 
