@@ -28,9 +28,9 @@ get the testnet account from https://teztnets.xyz/ithacanet-faucet (unfortunatel
 
 From the command line (wait a bit between the steps for the transactions to commit), run: 
 
-`tezos-client --endpoint https://rpc.ithacanet.teztnets.xyz config update` (again the giganode mentioned in most turials won't work)
+`tezos-client --endpoint https://rpc.ithacanet.teztnets.xyz config update` (again, the giganode adress mentioned in most tutorials won't work)
 
-pick a name for your account. replace [myname] below with that
+pick a name for your account. replace [myname] below with that name.
 
 `tezos-client activate account [myname] with account.json`
 
