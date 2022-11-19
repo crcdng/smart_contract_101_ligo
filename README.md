@@ -1,11 +1,11 @@
-# ligo_demo_contract
+# "my first Tezos smart contract"
 
-the steps below demonstrate how to install the required development tools and create a minimal Tezos smart contract in LIGO 
+this tutorial demonstrates how to install the required development tools and run a minimal Tezos smart contract in LIGO (https://www.ligolang.org/)
 
 - minimal Tezos smart contract demo 
-- from scratch, you only need a Mac (Intel) and some patience during the installation steps
-- run on testnet (simulation of the blockchain, no risk of loss)
-- up to date (some online tutorials are are outdated and don't work)
+- up to date (some online tutorials are are outdated / don't work)
+- step by step from scratch, you only need a Mac (Intel) and some patience during the installation 
+- run the smart contract on testnet (copy of the actual blockchain, no risk of value loss)
 
 ## i. install
 
@@ -42,7 +42,7 @@ followed by
 
 5. in VSCode, install the ligolang-vscode extension https://marketplace.visualstudio.com/items?itemName=ligolang-publish.ligo-vscode 
 
-this concludes the installation.
+...this concludes the installation. Now you are ready to code.
 
 ## ii. compile 
 
