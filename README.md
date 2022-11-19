@@ -85,4 +85,4 @@ pick a name for your account. replace [myname] below with that name.
 ### call the smart contract
 `tezos-client call mycontract from [myname] --arg "(Left (Right 32))" --burn-cap 0.2`  
 
-
+Published under the Creative Commons Attribution 4.0 International License (CC BY 4.0).
