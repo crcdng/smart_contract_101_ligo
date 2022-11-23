@@ -82,9 +82,9 @@ This code is here for demonstration purposes - it does not do something exciting
 
 You can learn more about LIGO and writing smart contracts in the [documentation](https://www.ligolang.org/docs/intro/introduction?lang=cameligo). For this tutorial we use that smart contract to show the next steps - compile it, deploy it to the testnet and then call the smart contract.
 
-## iii. compile 
+## iii. Compile 
 
-### test and compile the code 
+### Test and compile the code 
  
 Visual Studio Code has a menu that allows us to run commands: the Command Palette. With the code in `my_first_contract.mligo` open, select `View` -> `Command Palette` (or press SHIFT-CMD-P) and type `LIGO`. This provides a list of commands: 
 
@@ -107,7 +107,7 @@ Select `LIGO: Compile the current LIGO contract`. In the Output section of Visua
 
 Compiling transforms code written in a higher level programming language (here: LIGO) into a lower level language (here: Michelson). In general, you write LIGO code, compile it to Michelson and send the Michelson code to run on the blockchain (you could write Michelson directly, but LIGO is easier for humans to read and write). You do not need to learn Michelson at all, but if you want to dive into the details, you can find them [here](https://tezos.gitlab.io/active/michelson.html).
 
-In order to prepare the next step, you now would save the Michelson code into a file with the name `my_first_contract.tz`.
+In order to prepare the next step, you would save the Michelson code into a file with the name `my_first_contract.tz`.
 
 🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧 
 **WORK IN PROGRESS** 
