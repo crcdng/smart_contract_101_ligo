@@ -11,7 +11,7 @@ For a curated overview of Tezos developer resources see https://github.com/crcdn
 
 ## i. Install
 
-### v general development tools 
+### Install general development tools 
 
 1. Download and install the [Visual Studio Code code editor](https://code.visualstudio.com/)
 
@@ -19,7 +19,7 @@ For a curated overview of Tezos developer resources see https://github.com/crcdn
 
 `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
 
-If you do not have Apple's XCode already installed, make sure that you confirm when prompted "The XCode Command Line Tools will be installed." Alternatively, you can also install XCode from the Apple App Store.
+If you do not have Apple's XCode already installed, make sure that you confirm when prompted "The XCode Command Line Tools will be installed." Alternatively, you can also get XCode from the Apple App Store.
 
 ### Install LIGO specific development tools 
 
@@ -55,7 +55,7 @@ followed by
 
 Download and unzip this repository (or clone it if you are familiar with git) and open the folder in Visual Studio Code. To do this, either drag and drop the folder on an open Visual Studio Code window, or on its icon in the dock. Alternatively, select `File` -> `Open Folder...` from the menu and navigate to the folder. 
 
-Open the file [my_first_contract.mligo](my_first_contract.mligo). It contains a minimal smart contract that multiplies / divides numbers, adapted from https://www.ligolang.org/?lang=cameligo. The code in `my_first_contract.mligo` looks like this:
+Open the file [my_first_contract.mligo](my_first_contract.mligo). It contains a minimal smart contract, adapted from https://www.ligolang.org/?lang=cameligo:
 
 ```ligo
 type storage = int
@@ -78,18 +78,36 @@ let main (action, store : parameter * storage) : return =
  | Reset         -> 0)
 ```
 
-This code defines three types and three functions. The funcion called `main` takes parameters that describe the three entry points of the smart contract: one that multiplies the current value (storage) with a value, one that divides two values and one that resets a value to 0. 
+This code is here for demonstration purposes - it does not do something exciting except multiplying and dividing two numbers. The first lines define three types, followed by three functions. The function called `main` takes parameters that describe the three entry points of the smart contract: one that multiplies the current value (storage) with a value, one that divides two values and one that resets the current value to 0. 
 
-You can learn more about LIGO and writing smart contracts in the [documentation](https://www.ligolang.org/docs/intro/introduction?lang=cameligo). For now we use this code to demonstrate what to doi with it - to compile 
-
-  
-🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧 **WORK IN PROGRESS** 
+You can learn more about LIGO and writing smart contracts in the [documentation](https://www.ligolang.org/docs/intro/introduction?lang=cameligo). For this tutorial we use that smart contract to show the next steps - compile it, deploy it to the testnet and then call the smart contract.
 
 ## iii. compile 
 
-### compile and test the code 
+### test and compile the code 
  
-Visual Studio Code provides a menu to run commands: the Command Palette. Open it by selecting `View` -> `Command Palette` and type `LIGO`. This shows a list of commands 
+Visual Studio Code has a menu that allows us to run commands: the Command Palette. With the code in `my_first_contract.mligo` open, select `View` -> `Command Palette` (or press SHIFT-CMD-P) and type `LIGO`. This provides a list of commands: 
+
+![](images/vscode_ligo_commands.jpg)
+
+Select `LIGO: Compile the current LIGO contract`. In the Output section of Visual Stiudio Code, you should see: 
+
+```
+{ parameter (or (or (int %divide) (int %multiply)) (unit %reset)) ;
+  storage int ;
+  code { UNPAIR ;
+         IF_LEFT
+           { IF_LEFT
+               { SWAP ; EDIV ; IF_NONE { PUSH string "DIV by 0" ; FAILWITH } {} ; CAR }
+               { SWAP ; MUL } }
+           { DROP 2 ; PUSH int 0 } ;
+         NIL operation ;
+         PAIR } }
+```
+
+
+🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧 
+**WORK IN PROGRESS** 
 
 ## iV. deploy 
 
@@ -99,6 +117,28 @@ Visual Studio Code provides a menu to run commands: the Command Palette. Open it
 
 ### call the smart contract
 
-**WORK IN PROGRESS** 🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧
+
+🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧
+**WORK IN PROGRESS** 
+
+
+## Appendix
+
+Commands to run from the Terminal   
+
+Compile the contract:    
+`ligo compile contract my_first_contract.mligo -o my_first_contract.tz`
+
+`ligo run interpret "mul(10,32)" --init-file my_first_contract.mligo`
+
+Test the contract with some entry points and values:        
+`ligo run dry-run my_first_contract.mligo "Multiply(32)" "10"`        
+`ligo run dry-run my_first_contract.mligo "Divide(32)" "10"`        
+`ligo run dry-run my_first_contract.mligo "Divide(32)" "0"`        
+`ligo run dry-run my_first_contract.mligo "Reset()" "10"`        
+`ligo run dry-run my_first_contract.mligo "Divide(0)" "0"`    
+
+
+---
 
 Published under the Creative Commons Attribution 4.0 International License (CC BY 4.0).
