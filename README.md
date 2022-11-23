@@ -90,7 +90,7 @@ Visual Studio Code has a menu that allows us to run commands: the Command Palett
 
 ![](images/vscode_ligo_commands.jpg)
 
-Select `LIGO: Compile the current LIGO contract`. In the Output section of Visual Stiudio Code, you should see: 
+Select `LIGO: Compile the current LIGO contract`. In the Output section of Visual Studio Code, you should see: 
 
 ```
 { parameter (or (or (int %divide) (int %multiply)) (unit %reset)) ;
@@ -105,6 +105,9 @@ Select `LIGO: Compile the current LIGO contract`. In the Output section of Visua
          PAIR } }
 ```
 
+Compiling transforms code written in a higher level programming language (here: LIGO) into a lower level language (here: Michelson). In general, you write LIGO code, compile it to Michelson and send the Michelson code to run on the blockchain (you could write Michelson directly, but LIGO is easier for humans to read and write). You do not need to learn Michelson at all, but if you want to dive into the details, you can find them [here](https://tezos.gitlab.io/active/michelson.html).
+
+In order to prepare the next step, you now would save the Michelson code into a file with the name `my_first_contract.tz`.
 
 🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧 
 **WORK IN PROGRESS** 
