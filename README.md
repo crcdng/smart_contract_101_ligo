@@ -1,9 +1,9 @@
 # "my first Tezos smart contract"
 
-This short tutorial shows how to install development tools and run a minimal Tezos smart contract. 
+This short tutorial shows how to install the development tools and run a minimal Tezos smart contract. You need a Mac (tested on an Intel Mac) and some patience during the installation steps.
 
+- Start from scratch, no previous knowledge necessary 
 - Learn to develop a minimal Tezos smart contract 
-- Start from scratch, you need a Mac (Intel) and some patience during the installation steps
 - Write code in CameLIGO (https://www.ligolang.org/)
 - Run the smart contract on a testnet (copy of the actual blockchain, no risk of value loss)
 
@@ -15,17 +15,17 @@ For a curated overview of Tezos developer resources see https://github.com/crcdn
 
 1. Download and install the [Visual Studio Code code editor](https://code.visualstudio.com/)
 
-2. Install the [Homebrew](https://brew.sh/) tool environment: open a Terminal and execute this command 
+2. Install the [Homebrew](https://brew.sh/) tooling environment: open a Terminal (press command-Spacebar and type "terminal"), then execute this command in the Terminal 
 
 `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
 
-If you do not have Apple's XCode already installed, make sure that you confirm when prompted "The XCode Command Line Tools will be installed." Alternatively, you can also get XCode from the Apple App Store.
+If you do not already have Apple's XCode installed, make sure that you confirm when the installations prompts you with "The XCode Command Line Tools will be installed." Alternatively, you can also get XCode from the Apple App Store.
 
 ### Install LIGO specific development tools 
 
 3. Install the Tezos client 
 
-In the Terminal execute this command 
+In the Terminal, execute this command 
 
 `brew tap serokell/tezos-packaging-stable https://github.com/serokell/tezos-packaging-stable.git`
 
@@ -37,7 +37,7 @@ then:
 
 4. Install LIGO 
 
-In the Terminal execute this command 
+In the Terminal, execute this command 
 
 `brew tap ligolang/ligo https://gitlab.com/ligolang/ligo.git`
 
@@ -53,9 +53,9 @@ followed by
 
 ## ii. Code  
 
-Download and unzip this repository (or clone it if you are familiar with git) and open the folder in Visual Studio Code. To do this, either drag and drop the folder on an open Visual Studio Code window, or on its icon in the dock. Alternatively, select `File` -> `Open Folder...` from the menu and navigate to the folder. 
+Download and unzip this repository (or clone it if you are familiar with git) and open the folder in Visual Studio Code. To do this, either drag and drop the folder on an open Visual Studio Code window, or on its icon in the Dock. Alternatively, select `File` -> `Open Folder...` from the menu and navigate to the folder. 
 
-Open the file [my_first_contract.mligo](my_first_contract.mligo). It contains a minimal smart contract, adapted from https://www.ligolang.org/?lang=cameligo:
+Open the file [my_first_contract.mligo](my_first_contract.mligo). This is a minimal smart contract, adapted from https://www.ligolang.org/?lang=cameligo. It looks like this: 
 
 ```ligo
 type storage = int
@@ -78,7 +78,9 @@ let main (action, store : parameter * storage) : return =
  | Reset         -> 0)
 ```
 
-This code is here for demonstration purposes - it does not do something exciting except multiplying and dividing two numbers. The first lines define three types, followed by three functions. The function called `main` takes parameters that describe the three entry points of the smart contract: one that multiplies the current value (storage) with a value, one that divides two values and one that resets the current value to 0. 
+The smart contract shown here is for learning - all it does is to multiply or divide two numbers. However, its basic structure helps to understand any contract.
+
+The first three lines define types, followed by three functions. The function called `main` takes parameters that describe the three entry points of the smart contract: one that multiplies the current value (storage) with a value, one that divides these two values and one that resets the storage to 0. 
 
 You can learn more about LIGO and writing smart contracts in the [documentation](https://www.ligolang.org/docs/intro/introduction?lang=cameligo). For this tutorial we use that smart contract to show the next steps - compile it, deploy it to the testnet and then call the smart contract.
 
@@ -144,4 +146,4 @@ Test the contract with some entry points and values:
 
 ---
 
-Published under the Creative Commons Attribution 4.0 International License (CC BY 4.0).
+This repository is part of an onging effort to support Tezos developers and encourage artists who want to learn about creative (blockchain)   coding that started during [hicathon](https://hicathon.xyz/). Published under the Creative Commons Attribution 4.0 International License (CC BY 4.0).

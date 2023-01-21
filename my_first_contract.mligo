@@ -16,3 +16,5 @@ let main (action, store : parameter * storage) : return =
    Multiply (n) -> mul (store, n)
  | Divide (n) -> div (store, n)
  | Reset         -> 0)
+
+ 
