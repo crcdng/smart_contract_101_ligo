@@ -20,7 +20,6 @@ For a curated overview of Tezos developer resources see https://github.com/crcdn
 `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
 
 If you do not already have Apple's XCode installed, make sure that you confirm when the installations prompts you with "The XCode Command Line Tools will be installed." Alternatively, you can also get XCode from the Apple App Store.
-
 ### Install LIGO specific development tools 
 
 3. Install the Tezos client 
@@ -47,6 +46,13 @@ followed by
 
 (source: https://www.ligolang.org/docs/intro/installation/?lang=cameligo)
 
+Note: LIGO is getting regular updates, announced [on their website](https://ligolang.org/). You can run the following  commands to get the latest versions:  
+
+```
+brew update
+brew upgrade
+```
+
 5. In Visual Studio Code, install the [ligolang-vscode extension](https://marketplace.visualstudio.com/items?itemName=ligolang-publish.ligo-vscode) 
 
 ...this concludes the installation. Now you are ready to code.
@@ -61,88 +67,85 @@ Open the file [my_first_contract.mligo](my_first_contract.mligo). This is a mini
 type storage = int
 
 type parameter =
-  Multiply of int
-| Divide of int
+  Increment of int
+| Decrement of int
 | Reset
 
-type return = operation list * storage
+let add (store, delta : storage * int) = store + delta
+let sub (store, delta : storage * int) = store - delta
 
-let mul (store, delta : storage * int) : storage = store * delta
-let div (store, delta : storage * int) : storage = store / delta
-   
-let main (action, store : parameter * storage) : return =
- ([] : operation list),   
+let main (action, store : parameter * storage) : operation list * storage =
+ [],   
  (match action with
-   Multiply (n) -> mul (store, n)
- | Divide (n) -> div (store, n)
+   Increment (n) -> add (store, n)
+ | Decrement (n) -> sub (store, n)
  | Reset         -> 0)
 ```
 
-The smart contract shown here is for learning - all it does is to multiply or divide two numbers. However, its basic structure helps to understand any contract.
+The smart contract shown here is for learning - all it does is to multiply or divide two numbers. However, its basic structure is useful to understand any contract.
 
-The first three lines define types, followed by three functions. The function called `main` takes parameters that describe the three entry points of the smart contract: one that multiplies the current value (storage) with a value, one that divides these two values and one that resets the storage to 0. 
+In the first part it defines three types, followed by three functions. The `main` function is the starting point of the smart contract. It receives parameters that describe three possible actions of the smart contract and returns an empty list of operations and the updated storage. The three actions are: multiply the current value (storage) with a value, divide the two values and reset the storage to 0.
 
-You can learn more about LIGO and writing smart contracts in the [documentation](https://www.ligolang.org/docs/intro/introduction?lang=cameligo). For this tutorial we use that smart contract to show the next steps - compile it, deploy it to the testnet and then call the smart contract.
+Type definitions and functions are the major building blocks for smart contracts. You can learn more about this, the LIGO syntax and more elaborate smart contracts in the [documentation](https://www.ligolang.org/docs/intro/introduction?lang=cameligo). 
 
-## iii. Compile 
+For this tutorial we use the above code to show the next steps - compile it, deploy it to the testnet and then call the smart contract on the blockchain.
 
-### Test and compile the code 
+## iii. Compile and Test
+
+### Compile the code 
  
-Visual Studio Code has a menu that allows us to run commands: the Command Palette. With the code in `my_first_contract.mligo` open, select `View` -> `Command Palette` (or press SHIFT-CMD-P) and type `LIGO`. This provides a list of commands: 
+Visual Studio Code has a menu for running commands: the Command Palette. With the code in `my_first_contract.mligo` open, select `View` -> `Command Palette` (or press SHIFT-CMD-P) and type `LIGO`. This provides a list of commands like this one: 
 
 ![](images/vscode_ligo_commands.jpg)
 
 Select `LIGO: Compile the current LIGO contract`. In the Output section of Visual Studio Code, you should see: 
 
 ```
-{ parameter (or (or (int %divide) (int %multiply)) (unit %reset)) ;
+{ parameter (or (or (int %decrement) (int %increment)) (unit %reset)) ;
   storage int ;
   code { UNPAIR ;
-         IF_LEFT
-           { IF_LEFT
-               { SWAP ; EDIV ; IF_NONE { PUSH string "DIV by 0" ; FAILWITH } {} ; CAR }
-               { SWAP ; MUL } }
-           { DROP 2 ; PUSH int 0 } ;
+         IF_LEFT { IF_LEFT { SWAP ; SUB } { ADD } } { DROP 2 ; PUSH int 0 } ;
          NIL operation ;
          PAIR } }
 ```
 
-Compiling transforms code written in a higher level programming language (here: LIGO) into a lower level language (here: Michelson). In general, you write LIGO code, compile it to Michelson and send the Michelson code to run on the blockchain (you could write Michelson directly, but LIGO is easier for humans to read and write). You do not need to learn Michelson at all, but if you want to dive into the details, you can find them [here](https://tezos.gitlab.io/active/michelson.html).
+Compiling transforms code written in a higher level programming language meant for humans (here: LIGO) into a lower level language (here: Michelson). In general, you write code in LIGO, compile it to Michelson and send the Michelson code to run on the blockchain. You do not need to learn Michelson at all, but if you want to dive into the details, you can find them [here](https://tezos.gitlab.io/active/michelson.html).
 
-In order to prepare the next step, you would save the Michelson code into a file with the name `my_first_contract.tz`.
+While the Command Palette is useful for quick testing, there is a second way to run more LIGO commands: the command line interface (CLI). To use the CLI, open a Terminal window in VSCode `Terminal -> New Terminal`.
 
-🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧 
+Then enter this line into the Terminal window:
+
+```
+ligo compile contract my_first_contract.mligo -o my_first_contract.tz
+```
+
+It creates a new file `my_first_contract.tz`. Look into that file: it contains the compiled contract, the same output as above.
+
+```
+ligo compile contract my_first_contract.mligo -o my_first_contract.tz
+```
+
+### Test the code 
+
+Now you can also test - "dry run" - the code. To add 8 to the initial storage value 0, enter this line into the Terminal window:
+
+```
+ligo run dry-run my_first_contract.mligo "Increment(8)" "0"
+```
+
+The output is:
+
+```
+( LIST_EMPTY() , 8 )
+```
+
+This is the empty list of operations and the value 8 in the updated storage, as mentioned above.
+
+Now, in a real project you would be well-advised to test the functions of the smart contract more thoroughly and also to test the Michelson code on a local, simulated blockchain. These steps are described [here](https://ligolang.org/docs/tutorials/getting-started?lang=cameligo#test-the-code-with-ligo-test-framework) and [here](https://ligolang.org/docs/tutorials/getting-started?lang=cameligo#testing-the-michelson-contract). We will go on and deploy our contract on a public chain made for testing - the Ghostnet.
+
+## iv. Deploy 
+
 **WORK IN PROGRESS** 
-
-## iV. deploy 
-
-### activate a testnet account 
-
-### deploy the smart contract
-
-### call the smart contract
-
-
-🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧
-**WORK IN PROGRESS** 
-
-
-## Appendix
-
-Commands to run from the Terminal   
-
-Compile the contract:    
-`ligo compile contract my_first_contract.mligo -o my_first_contract.tz`
-
-`ligo run interpret "mul(10,32)" --init-file my_first_contract.mligo`
-
-Test the contract with some entry points and values:        
-`ligo run dry-run my_first_contract.mligo "Multiply(32)" "10"`        
-`ligo run dry-run my_first_contract.mligo "Divide(32)" "10"`        
-`ligo run dry-run my_first_contract.mligo "Divide(32)" "0"`        
-`ligo run dry-run my_first_contract.mligo "Reset()" "10"`        
-`ligo run dry-run my_first_contract.mligo "Divide(0)" "0"`    
-
 
 ---
 

@@ -1,20 +1,18 @@
 type storage = int
 
 type parameter =
-  Multiply of int
-| Divide of int
+  Increment of int
+| Decrement of int
 | Reset
 
-type return = operation list * storage
+let add (store, delta : storage * int) = store + delta
+let sub (store, delta : storage * int) = store - delta
 
-let mul (store, delta : storage * int) : storage = store * delta
-let div (store, delta : storage * int) : storage = store / delta
-   
-let main (action, store : parameter * storage) : return =
- ([] : operation list),   
+let main (action, store : parameter * storage) : operation list * storage =
+ [],   
  (match action with
-   Multiply (n) -> mul (store, n)
- | Divide (n) -> div (store, n)
+   Increment (n) -> add (store, n)
+ | Decrement (n) -> sub (store, n)
  | Reset         -> 0)
 
  
