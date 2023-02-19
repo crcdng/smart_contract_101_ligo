@@ -1,6 +1,6 @@
 # "my first Tezos smart contract"
 
-This short tutorial shows how to install the development tools and run a minimal Tezos smart contract with LIGO. You need a Mac (tested on an Intel Mac) and some patience during the installation steps.
+This short tutorial shows how to install the development tools and run a minimal Tezos smart contract with LIGO. You need a Mac (tested on an Intel MacBook Pro 2018, macOS Monterey) and some patience during the installation steps.
 
 - Start from scratch, no previous knowledge necessary 
 - Learn to develop a minimal Tezos smart contract 
@@ -19,7 +19,8 @@ For a curated overview of Tezos developer resources see https://github.com/crcdn
 
 `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
 
-If you do not already have Apple's XCode installed, make sure that you confirm when the installations prompts you with "The XCode Command Line Tools will be installed." Alternatively, you can also get XCode from the Apple App Store.
+If you do not already have Apple's XCode installed, make sure that you confirm when the installations prompts you with "The XCode Command Line Tools will be installed." Alternatively, you can also get XCode from the Apple App Store. 
+
 ### Install LIGO specific development tools 
 
 3. Install the Tezos client 
@@ -45,6 +46,8 @@ followed by
 `brew install ligolang/ligo/ligo`
 
 (source: https://www.ligolang.org/docs/intro/installation/?lang=cameligo)
+
+Close and re-open the Terminal. 
 
 Note: LIGO is getting regular updates, announced [on their website](https://ligolang.org/). You can run the following  commands to get the latest versions:  
 
@@ -84,7 +87,7 @@ let main (action, store : parameter * storage) : operation list * storage =
 
 The smart contract shown here is for learning - all it does is to multiply or divide two numbers. However, its basic structure is useful to understand any contract.
 
-In the first part it defines three types, followed by three functions. The `main` function is the starting point of the smart contract. It receives parameters that describe three possible actions of the smart contract and returns an empty list of operations and the updated storage. The three actions are: multiply the current value (storage) with a value, divide the two values and reset the storage to 0.
+In the first part it defines three types, followed by three functions. The `main` function is the entrypoint of the smart contract. It receives parameters that describe three possible actions of the smart contract and returns an empty list of operations and the updated storage. The three actions are: multiply the current value (storage) with a value, divide the two values and reset the storage to 0.
 
 Type definitions and functions are the major building blocks for smart contracts. You can learn more about this, the LIGO syntax and more elaborate smart contracts in the [documentation](https://www.ligolang.org/docs/intro/introduction?lang=cameligo). 
 
@@ -98,7 +101,7 @@ Visual Studio Code has a menu for running commands: the Command Palette. With th
 
 ![](images/vscode_ligo_commands.jpg)
 
-Select `LIGO: Compile the current LIGO contract`. In the Output section of Visual Studio Code, you should see: 
+Select `LIGO: Compile the current LIGO contract`. Confirm the prompt that sets the `main` function as the entrypoint. In the Output section of Visual Studio Code, you should see: 
 
 ```
 { parameter (or (or (int %decrement) (int %increment)) (unit %reset)) ;
@@ -109,9 +112,9 @@ Select `LIGO: Compile the current LIGO contract`. In the Output section of Visua
          PAIR } }
 ```
 
-Compiling transforms code written in a higher level programming language meant for humans (here: LIGO) into a lower level language (here: Michelson). In general, you write code in LIGO, compile it to Michelson and send the Michelson code to run on the blockchain. You do not need to learn Michelson at all, but if you want to dive into the details, you can find them [here](https://tezos.gitlab.io/active/michelson.html).
+What does compiling do? It transforms code written in a higher level programming language that is meant for humans (here: CameLIGO) into a lower level language that is meant to run on a machine (here: Michelson). In general, writingb a smart contract means you write the code in CameLIGO, compile it to Michelson and send the Michelson code to run on the blockchain. Note that you do not need to learn Michelson, but if you want you can [dive into it here](https://tezos.gitlab.io/active/michelson.html).
 
-While the Command Palette is useful for quick testing, there is a second way to run more LIGO commands: the command line interface (CLI). To use the CLI, open a Terminal window in VSCode `Terminal -> New Terminal`.
+While the Command Palette is useful for quick testing, there is a second way to run LIGO commands: the command line interface (CLI). To use the CLI, open a Terminal window in VSCode `Terminal -> New Terminal`. This is similar to the Terminal we used above, but it is integrated in VSCode.
 
 Then enter this line into the Terminal window:
 
@@ -119,15 +122,11 @@ Then enter this line into the Terminal window:
 ligo compile contract my_first_contract.mligo -o my_first_contract.tz
 ```
 
-It creates a new file `my_first_contract.tz`. Look into that file: it contains the compiled contract, the same output as above.
-
-```
-ligo compile contract my_first_contract.mligo -o my_first_contract.tz
-```
+This write a file called `my_first_contract.tz`. Look into that file: it contains the compiled contract, which is the same output as above.
 
 ### Test the code 
 
-Now you can also test - "dry run" - the code. To add 8 to the initial storage value 0, enter this line into the Terminal window:
+Now you can also test out what the code does ("dry run"). Remember, we want to add two numbers and store the result. The initial value is 0. To add 8 to that initial value, enter this line into the Terminal window:
 
 ```
 ligo run dry-run my_first_contract.mligo "Increment(8)" "0"
@@ -139,9 +138,11 @@ The output is:
 ( LIST_EMPTY() , 8 )
 ```
 
-This is the empty list of operations and the value 8 in the updated storage, as mentioned above.
+This is the result: an empty list of operations (a more advanced topic, addressed in a future tutorial) and the value 8 which is now in the updated storage.
 
-Now, in a real project you would be well-advised to test the functions of the smart contract more thoroughly and also to test the Michelson code on a local, simulated blockchain. These steps are described [here](https://ligolang.org/docs/tutorials/getting-started?lang=cameligo#test-the-code-with-ligo-test-framework) and [here](https://ligolang.org/docs/tutorials/getting-started?lang=cameligo#testing-the-michelson-contract). We will go on and deploy our contract on a public chain made for testing - the Ghostnet.
+In a real project you would test the functions of the smart contract more thoroughly and also test the Michelson code on a local, simulated blockchain. These steps are described [here](https://ligolang.org/docs/tutorials/getting-started?lang=cameligo#test-the-code-with-ligo-test-framework) and [here](https://ligolang.org/docs/tutorials/getting-started?lang=cameligo#testing-the-michelson-contract). 
+
+We will go on and deploy our contract on a public blockchain that is made for testing - the Ghostnet.
 
 ## iv. Deploy 
 
