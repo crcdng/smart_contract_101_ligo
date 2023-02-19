@@ -1,6 +1,6 @@
 # "my first Tezos smart contract"
 
-This short tutorial shows how to install the development tools and run a minimal Tezos smart contract. You need a Mac (tested on an Intel Mac) and some patience during the installation steps.
+This short tutorial shows how to install the development tools and run a minimal Tezos smart contract with LIGO. You need a Mac (tested on an Intel Mac) and some patience during the installation steps.
 
 - Start from scratch, no previous knowledge necessary 
 - Learn to develop a minimal Tezos smart contract 
