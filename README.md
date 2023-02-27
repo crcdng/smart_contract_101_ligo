@@ -1,6 +1,6 @@
 # "my first Tezos smart contract - LIGO s"
 
-**Note thatthis tuturial is still incomplete ON HOLD while LIGO is preparing for some major updates and updating their documentation ("V1"). I'll pick it up again when these changes are made.**
+![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) *Note that this tuturial is still incomplete and on hold while LIGO is preparing for some major updates and updating their documentation ("V1"). I'll pick it up again when these changes are made.*
 
 This short tutorial shows how to install the development tools and run a minimal Tezos smart contract with LIGO. You need a Mac (tested on an Intel MacBook Pro 2018, macOS Monterey) and some patience during the installation steps.
 
