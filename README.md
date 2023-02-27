@@ -137,7 +137,7 @@ The output is:
 
 This is the result of calling the smart contract: an empty list of operations (a more advanced topic, addressed in a future tutorial) and the 42 which is now the value of the updated storage.
 
-In a real project you would test the functions of the smart contract more thoroughly and also test the Michelson code on a local, simulated blockchain. These steps are described [here](https://ligolang.org/docs/tutorials/getting-started?lang=cameligo#test-the-code-with-ligo-test-framework) and [here](https://ligolang.org/docs/tutorials/getting-started?lang=cameligo#testing-the-michelson-contract). 
+*Note: In a real project you would test the functions of the smart contract thoroughly and also test the Michelson code on a local, simulated blockchain. These steps are described [here](https://ligolang.org/docs/tutorials/getting-started?lang=cameligo#test-the-code-with-ligo-test-framework) and [here](https://ligolang.org/docs/tutorials/getting-started?lang=cameligo#testing-the-michelson-contract).* 
 
 We will go on and deploy our contract on a public blockchain that is made for testing - the Ghostnet.
 
