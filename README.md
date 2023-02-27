@@ -1,5 +1,7 @@
 # "my first Tezos smart contract - LIGO s"
 
+**Note thatthis tuturial is still incomplete ON HOLD while LIGO is preparing for some major updates and updating their documentation ("V1"). I'll pick it up again when these changes are made.**
+
 This short tutorial shows how to install the development tools and run a minimal Tezos smart contract with LIGO. You need a Mac (tested on an Intel MacBook Pro 2018, macOS Monterey) and some patience during the installation steps.
 
 - Start from scratch, no previous knowledge necessary 
@@ -23,7 +25,7 @@ If you do not already have Apple's XCode installed, make sure that you confirm w
 
 ### Install LIGO specific development tools 
 
-3. Install the Tezos client 
+3. Install the Tezos client with Homebrew
 
 In the Terminal, execute this command: 
 
@@ -35,7 +37,7 @@ then:
 
 (source: https://github.com/serokell/tezos-packaging/blob/master/docs/distros/macos.md)
 
-4. Install LIGO 
+4. Install LIGO with Homebrew
 
 In the Terminal, execute this command 
 
@@ -51,15 +53,11 @@ Close and re-open the Terminal.
 
 Note: LIGO is getting regular updates that are announced [on their website](https://ligolang.org/). To get the latest version, run these two commands in Terminal:   
 
-`
-brew update
-`
+`brew update`
 
 followed by 
 
-`
-brew upgrade
-`
+`brew upgrade`
 
 5. In Visual Studio Code, install the [ligolang-vscode extension](https://marketplace.visualstudio.com/items?itemName=ligolang-publish.ligo-vscode) 
 
@@ -117,7 +115,7 @@ Select `LIGO: Compile the current LIGO contract`. Confirm the prompt that sets t
          PAIR } }
 ```
 
-What does 'compile' do? It transforms code written in a higher level programming language, one that is meant for humans (here: CameLIGO) into a lower level language that is meant to run on a machine (here: Michelson). In general, we write the code in CameLIGO, compile it to Michelson and then send the Michelson code to the Tezos blockchain, where its entry point can be called by anyone. Note that you do not need to learn Michelson, but if you want you [can dive into it here](https://tezos.gitlab.io/active/michelson.html).
+What does 'compile' do? It transforms code written in a higher level programming language, one that is meant for humans (here: CameLIGO) into a lower level language that is meant to run on the blockchain (here: Michelson). In general, we write the code in CameLIGO, compile it to Michelson and then send the Michelson code to the Tezos blockchain. Note that you do not need to learn Michelson, but if you want you [can dive into it here](https://tezos.gitlab.io/active/michelson.html).
 
 While the Command Palette in VSCode is useful for quick testing, there is a second way to run LIGO commands: the command line interface (CLI). To use the CLI, open a Terminal window inside VSCode `Terminal -> New Terminal`. This is similar to the Terminal we used above.
 
@@ -125,21 +123,17 @@ Then enter this line into the Terminal window:
 
 `ligo compile contract my_first_contract.mligo -o my_first_contract.tz`
 
-This writes a file called `my_first_contract.tz`. Look into that file: it contains the compiled contract, which is the same output as above.
+This writes a file called `my_first_contract.tz`. Look into that file: it contains the compiled contract, the same output as above.
 
 ### Test the code 
 
 Now you can also test out what the code does ("dry run"). Remember, we want to add two numbers and store the result. To set the initial value to 10 and add 32 to that value, enter this line into the Terminal window:
 
-```
-ligo run dry-run my_first_contract.mligo "Increment(32)" "10"
-```
+`ligo run dry-run my_first_contract.mligo "Increment(32)" "10"`
 
 The output is:
 
-```
-( LIST_EMPTY() , 42 )
-```
+`( LIST_EMPTY() , 42 )`
 
 This is the result of calling the smart contract: an empty list of operations (a more advanced topic, addressed in a future tutorial) and the 42 which is now the value of the updated storage.
 
