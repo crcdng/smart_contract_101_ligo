@@ -1,4 +1,4 @@
-# "my first Tezos smart contract - LIGO s"
+# "my first Tezos smart contract - LIGO edition"
 
 ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) *Note that this tuturial is still incomplete and on hold while LIGO is preparing for some major updates and updating their documentation ("V1"). I'll pick it up again when these changes are made.*
 
