@@ -1,6 +1,4 @@
-# "my first Tezos smart contract - LIGO edition"
-
-![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) *Note that this tuturial is still incomplete and on hold while LIGO is preparing for some major updates and updating their documentation ("V1"). I'll pick it up again when these changes are made.*
+# "my first Tezos smart contract with LIGO - Mac edition"
 
 This short tutorial shows how to install the development tools and run a minimal Tezos smart contract with LIGO. You need a Mac (tested on an Intel MacBook Pro 2018, macOS Monterey) and some patience during the installation steps.
 
@@ -142,6 +140,70 @@ This is the result of calling the smart contract: an empty list of operations (a
 We will go on and deploy our contract on a public blockchain that is made for testing - the Ghostnet.
 
 ## iv. Deploy 
+
+### Welcome to Ghostnet 
+
+In the Terminal, type:
+
+`octez-client --endpoint https://ghostnet.tezos.marigold.dev/ config update`
+
+The Ghostnet is a copy of the real Tezos blockchain (which is called 'Mainnet') made for coding and testing. It does not carry any real value. Technically it is like the 'real' chain, therefore every transaction on Ghostnet requires an account.  
+
+Our scenario requires two roles: the first one is the developer who publishes the contract. This is sometimes called the 'admin' of the contract. For the admin, we create an account with the tezos-client installed above. The second role is that of a user of the contract. That one we will create below with a wallet in the web browser. 
+
+To create an account with name 'alice' in the Terminal, type:
+
+`octez-client gen keys alice`
+
+Then,
+
+`octez-client show address alice`
+
+You will see the address of the account, here called 'Hash' - it starts with 'tz..'. In order to work correctly, however, the account also needs some (fake) currency. The cryptocurrency on Tezos is called 'tez'. Go to https://faucet.ghostnet.teztnets.xyz/, paste the address into the textfield and click 'Request 100 tez'. Wait a little. Then confitm that the account has received the amount:
+
+`octez-client get balance for alice`
+
+We now have the three ingredients required to deploy our smart contract:
+
+* an account
+* the smart contract code
+* a connection to a public blockchain node that allows us to deploy the smart contract to the Ghostnet 
+
+Let's deploy:
+
+`octez-client originate contract my_first_contract transferring 0 from alice running my_first_contract.tz --init 0 --burn-cap 0.1`
+
+### Explore the new smart contract
+
+We receive a long confirmation message that contains the address of the smart contract. It starts with 'KT1..'.
+
+`New contract KT1RQ2QUSAnmt32LdZTv9roUB8J6Fdqzbi5r originated.`
+
+We can now inspect our contract on the blockchain with the 'better-call.dev'. Go to 
+
+https://better-call.dev/ghostnet/
+
+In the search field, enter the contracts address. This tool provides lot of information about the contract we just deployed. Let's first confirm that the creator is our admin account. Then we want to see if the code works as expected. Keep this tab open in your web browser.
+
+We will now make a second account using the Kukai wallet. Go to https://ghostnet.kukai.app/new-wallet and follow the instructions. Create a password and download the keystore file when prompted. *Remember that all accounts we create in this workshop are throw-away accounts, for coding and testing on Ghostnet and nothing else.*  
+
+Then find the button to copy the address of the wallet. Keep this tab also open. 
+ 
+In order to work correctly, this account should also get some (fake) tez. Go back to https://faucet.ghostnet.teztnets.xyz/, paste the address copied in the last step into the textfield and click 'Request 100 tez'. Wait a little. 
+
+Then, back in the 'better-call.dev' tool, select 'Interact' from the menu, then under 'Entrypoints' select 'increment', enter the number 1 into the 'increment' field and click 'Execute' to call the entry point of the smart contract. You will see a menu with some choices. Select 'Wallet'. 
+
+You see 'Awaiting confirmation in Kukai Wallet'. Change to the tab with the Kukai wallet and confirm. You might have to enter the password that you created for the encrypted keystore file while setting up the wallet. 
+
+Now go back to 'better-call.dev'. If everything goes well, you see 'The transaction has successfully been broadcasted to the network.' Switch to the 'Storage' tab and you see the increased value in the contract. Finally, have a look at the 'Operations' tab and you can see the 'increment' endpoint that you just called: like every operation it is now recorded on the blockchain. 
+
+Congrats! 
+
+You have... 
+
+* learned to install the necessary tools for Tezos smart contract development
+* created a smart contract with Archetype and inpected the generated code
+* deployed your first smart contract to the Ghostnet and tested it.
 
 **WORK IN PROGRESS** 
 
