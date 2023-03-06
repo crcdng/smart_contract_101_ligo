@@ -47,6 +47,8 @@ followed by
 
 (source: https://www.ligolang.org/docs/intro/installation/?lang=cameligo)
 
+*Note: this can take long, on my Mac: 28 minutes 35 seconds*
+
 Close and re-open the Terminal. 
 
 Note: LIGO is getting regular updates that are announced [on their website](https://ligolang.org/). To get the latest version, run these two commands in Terminal:   
