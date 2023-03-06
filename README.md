@@ -155,7 +155,7 @@ To create an account with name 'alice' in the Terminal, type:
 
 `octez-client gen keys alice`
 
-Then,
+Then:
 
 `octez-client show address alice`
 
@@ -202,10 +202,8 @@ Congrats!
 You have... 
 
 * learned to install the necessary tools for Tezos smart contract development
-* created a smart contract with Archetype and inpected the generated code
+* created a smart contract with CameLIGO and inspected the generated code
 * deployed your first smart contract to the Ghostnet and tested it.
-
-**WORK IN PROGRESS** 
 
 ---
 
