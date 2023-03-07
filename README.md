@@ -21,6 +21,8 @@ For a curated overview of Tezos developer resources see https://github.com/crcdn
 
 If you do not already have Apple's XCode installed, make sure that you confirm when the installations prompts you with "The XCode Command Line Tools will be installed." Alternatively, you can also get XCode from the Apple App Store. 
 
+*Note: installing XCode can take a long long time*
+
 ### Install LIGO specific development tools 
 
 3. Install the Tezos client with Homebrew
@@ -47,7 +49,7 @@ followed by
 
 (source: https://www.ligolang.org/docs/intro/installation/?lang=cameligo)
 
-*Note: this can take long, on my Mac: 28 minutes 35 seconds*
+*Note: this can take a long time, on my Mac: 28 minutes 35 seconds*
 
 Close and re-open the Terminal. 
 
